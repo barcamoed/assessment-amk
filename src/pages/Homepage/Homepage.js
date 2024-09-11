@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import PlaceCard from '../../components/PlaceCard/PlaceCard';
 import { fetchPlaces } from '../../services/api';
 import { handlePlaces } from '../../services/api';
@@ -36,7 +37,7 @@ function HomePage() {
       </h1>
 
       <div className="grid grid-cols-1 gap-4 ml-16 mr-16">
-        <p className="ml-16 mr-16 text-left mb-3 text-gray-500 dark:text-gray-400">
+        <p className="lg:ml-24 lg:mr-16 text-left mb-3 text-gray-500 dark:text-gray-400">
           Track work across the enterprise through an open, collaborative
           platform. Link issues across Jira and ingest data from other software
           development tools, so your IT support and operations teams have richer
@@ -46,13 +47,19 @@ function HomePage() {
       </div>
 
       <div className="flex flex-row gap-6 flex-wrap items-stretch place-content-center">
-        {places && places.length > 0 ? places.map((place) => (
-          <PlaceCard
-            key={place.id}
-            place={place}
-            onViewDetail={handleViewDetail}
-          />
-        )) : <p className="ml-16 mr-16 text-left mb-3 text-gray-500 dark:text-gray-400">No Places found</p>}
+        {places && places.length > 0 ? (
+          places.map((place) => (
+            <PlaceCard
+              key={place.id}
+              place={place}
+              onViewDetail={handleViewDetail}
+            />
+          ))
+        ) : (
+          <p className="ml-16 mr-16 text-left mb-3 text-gray-500 dark:text-gray-400">
+            No Places found
+          </p>
+        )}
       </div>
     </div>
   );
